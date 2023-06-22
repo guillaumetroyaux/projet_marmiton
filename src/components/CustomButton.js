@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const CustomButton = ({ onPress, title, navigation }) => {
-  const handlePress = () => {
-    if (onPress) {
-      onPress(); // Appel de la fonction de soumission fournie
-    }
-
-    // Naviguer vers la page HomeScreen
-    navigation.navigate("AccueilScreen");
-  };
-
+const CustomButton = ({ onPress = () => {}, title, navigation }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={handlePress}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

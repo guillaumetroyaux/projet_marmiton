@@ -7,47 +7,13 @@ import RegisterScreen from "./src/sceens/RegisterScreen";
 import AccueilScreen from "./src/sceens/AccueilScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CreationArticleScreen from "./src/sceens/CreationArticleScreen";
-import { UserProvider } from "./src/contexts/UserContexts"; // Importez le composant UserProvider depuis le fichier UserContext
-
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="AccueilScreen" component={AccueilScreen} />
-      <Tab.Screen
-        name="CreationArticleScreen"
-        component={CreationArticleScreen}
-      />
-    </Tab.Navigator>
-  );
-}
+import { UserProvider } from "./src/contexts/UserContexts";
+import Navigation from "./src/navigation/Routes";
 
 export default function App() {
-  const [count, setCount] = useState(0);
-  const updateCount = () => {
-    setCount(count + 1);
-  };
-  const deleteCount = () => {
-    setCount(count - 1);
-  };
-
   return (
     <UserProvider>
-      {" "}
-      {/* Enveloppez votre NavigationContainer avec le composant UserProvider */}
-      <NavigationContainer style={styles.container}>
-        <Stack.Navigator>
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-          <Stack.Screen
-            name="AccueilScreen"
-            component={MyTabs}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Navigation></Navigation>
     </UserProvider>
   );
 }

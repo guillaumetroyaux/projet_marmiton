@@ -5,7 +5,10 @@ export const UserContext = createContext();
 
 // Créez le composant fournisseur du contexte utilisateur
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    username : "",
+    role : ""
+  });
 
   // Fonction pour définir l'utilisateur connecté
   const login = (userData) => {

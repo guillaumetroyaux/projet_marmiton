@@ -1,8 +1,9 @@
 import { Text, TextInput, View } from "react-native";
 import { StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "../components/CustomButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { fetchData } from "../service/apiFetch";
 
 export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -15,7 +16,19 @@ export default function RegisterScreen({ navigation }) {
     console.log(username);
     console.log(password);
 
-    fetch("https://b336-79-174-199-126.ngrok-free.app/register", {
+    useEffect(() => {
+      fetchData("/register", { username, password })
+        .then((response) => response.json())
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log("Erreur lors de la requête :", error);
+        });
+      setLoader(false);
+    });
+    /* fetch(
+      "https://b336-79-174-199-126.ngrok-free.app/register", {
       method: "post",
       body: JSON.stringify({
         username,
@@ -24,7 +37,7 @@ export default function RegisterScreen({ navigation }) {
       headers: {
         "content-type": "application/json",
       },
-    })
+    }) 
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
@@ -32,7 +45,7 @@ export default function RegisterScreen({ navigation }) {
       .catch((error) => {
         console.log("Erreur lors de la requête :", error);
       });
-    setLoader(false);
+    setLoader(false); */
   };
 
   return (
